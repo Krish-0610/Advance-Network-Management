@@ -1,0 +1,26 @@
+! Basic switch configuration template
+enable
+configure terminal
+
+! Set hostname
+hostname {{HOSTNAME}}
+
+! Configure VLANs
+vlan 10
+ name Data
+vlan 20
+ name Voice
+
+! Configure management VLAN interface
+interface vlan 1
+ ip address {{MGMT_IP}} {{SUBNET_MASK}}
+ no shutdown
+
+! Configure SNMP
+snmp-server community {{COMMUNITY_STRING}} RO
+snmp-server location {{LOCATION}}
+snmp-server contact {{CONTACT}}
+
+! Save configuration
+end
+write memory 

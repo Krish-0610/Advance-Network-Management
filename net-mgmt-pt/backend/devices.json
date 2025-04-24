@@ -1,0 +1,11 @@
+{
+    "devices": [
+        {
+            "id": "SW1",
+            "type": "switch",
+            "model": "Cisco 2960",
+            "ip": "192.168.1.10",
+            "location": "Main Office"
+        }
+    ]
+}
