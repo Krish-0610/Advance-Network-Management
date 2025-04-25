@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts - Network Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>NetMgmt</h2>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="devices.html"><i class="fas fa-server"></i> Devices</a></li>
+                    <li><a href="topology.html"><i class="fas fa-project-diagram"></i> Topology</a></li>
+                    <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                    <li><a href="metrics.html"><i class="fas fa-chart-line"></i> Metrics</a></li>
+                    <li class="active"><a href="alerts.html"><i class="fas fa-bell"></i> Alerts</a></li>
+                    <li><a href="settings.html"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Network Management v1.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search alerts...">
+                </div>
+                <div class="user-actions">
+                    <button class="btn refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Alerts Section -->
+            <section class="alerts-section">
+                <div class="alerts-header">
+                    <h1>Alerts & Notifications</h1>
+                    <div class="alerts-actions">
+                        <button class="btn"><i class="fas fa-cog"></i> Manage Rules</button>
+                        <button class="btn primary-btn"><i class="fas fa-plus"></i> Create Alert</button>
+                    </div>
+                </div>
+                
+                <!-- Alerts Overview -->
+                <div class="alerts-overview">
+                    <div class="alert-card critical">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="alert-info">
+                            <h3>Critical</h3>
+                            <div class="alert-count">3</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-card warning">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-info">
+                            <h3>Warning</h3>
+                            <div class="alert-count">7</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-card info">
+                        <div class="alert-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="alert-info">
+                            <h3>Information</h3>
+                            <div class="alert-count">15</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-card resolved">
+                        <div class="alert-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="alert-info">
+                            <h3>Resolved</h3>
+                            <div class="alert-count">28</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Alerts Tabs -->
+                <div class="alerts-tabs">
+                    <ul class="tabs">
+                        <li class="tab active" data-tab="active">Active Alerts</li>
+                        <li class="tab" data-tab="history">Alert History</li>
+                        <li class="tab" data-tab="rules">Alert Rules</li>
+                    </ul>
+                </div>
+                
+                <!-- Alerts Content -->
+                <div class="alerts-content">
+                    <!-- Active Alerts Tab -->
+                    <div class="tab-content active" id="active">
+                        <div class="filter-section">
+                            <div class="filter-group">
+                                <label>Severity:</label>
+                                <select class="form-control">
+                                    <option>All Severities</option>
+                                    <option>Critical</option>
+                                    <option>Warning</option>
+                                    <option>Information</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Device Type:</label>
+                                <select class="form-control">
+                                    <option>All Devices</option>
+                                    <option>Routers</option>
+                                    <option>Switches</option>
+                                    <option>Firewalls</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Time Range:</label>
+                                <select class="form-control">
+                                    <option>Last 24 Hours</option>
+                                    <option>Last 7 Days</option>
+                                    <option>Last 30 Days</option>
+                                    <option>Custom</option>
+                                </select>
+                            </div>
+                            <button class="btn filter-btn"><i class="fas fa-filter"></i> Apply</button>
+                        </div>
+                        
+                        <!-- Active Alerts List -->
+                        <div class="alerts-list">
+                            <div class="alert-item critical">
+                                <div class="alert-severity">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Critical</span>
+                                </div>
+                                <div class="alert-details">
+                                    <h3>High CPU Usage</h3>
+                                    <p>Core-Router-01 CPU utilization exceeds 90% for over 5 minutes</p>
+                                    <div class="alert-meta">
+                                        <span class="alert-time"><i class="fas fa-clock"></i> 15 minutes ago</span>
+                                        <span class="alert-source"><i class="fas fa-server"></i> Core-Router-01</span>
+                                    </div>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn"><i class="fas fa-eye"></i> View</button>
+                                    <button class="btn"><i class="fas fa-check"></i> Acknowledge</button>
+                                </div>
+                            </div>
+                            
+                            <div class="alert-item critical">
+                                <div class="alert-severity">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Critical</span>
+                                </div>
+                                <div class="alert-details">
+                                    <h3>Link Down</h3>
+                                    <p>Connection between Edge-Switch-02 and DMZ-Firewall is down</p>
+                                    <div class="alert-meta">
+                                        <span class="alert-time"><i class="fas fa-clock"></i> 28 minutes ago</span>
+                                        <span class="alert-source"><i class="fas fa-server"></i> Edge-Switch-02</span>
+                                    </div>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn"><i class="fas fa-eye"></i> View</button>
+                                    <button class="btn"><i class="fas fa-check"></i> Acknowledge</button>
+                                </div>
+                            </div>
+                            
+                            <div class="alert-item warning">
+                                <div class="alert-severity">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span>Warning</span>
+                                </div>
+                                <div class="alert-details">
+                                    <h3>Memory Utilization</h3>
+                                    <p>Access-Switch-05 memory usage at 85% - approaching threshold</p>
+                                    <div class="alert-meta">
+                                        <span class="alert-time"><i class="fas fa-clock"></i> 45 minutes ago</span>
+                                        <span class="alert-source"><i class="fas fa-server"></i> Access-Switch-05</span>
+                                    </div>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn"><i class="fas fa-eye"></i> View</button>
+                                    <button class="btn"><i class="fas fa-check"></i> Acknowledge</button>
+                                </div>
+                            </div>
+                            
+                            <div class="alert-item warning">
+                                <div class="alert-severity">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span>Warning</span>
+                                </div>
+                                <div class="alert-details">
+                                    <h3>Interface Errors</h3>
+                                    <p>Core-Switch-01 Port Gi0/1 experiencing high error rate</p>
+                                    <div class="alert-meta">
+                                        <span class="alert-time"><i class="fas fa-clock"></i> 1 hour ago</span>
+                                        <span class="alert-source"><i class="fas fa-server"></i> Core-Switch-01</span>
+                                    </div>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn"><i class="fas fa-eye"></i> View</button>
+                                    <button class="btn"><i class="fas fa-check"></i> Acknowledge</button>
+                                </div>
+                            </div>
+                            
+                            <div class="alert-item info">
+                                <div class="alert-severity">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Information</span>
+                                </div>
+                                <div class="alert-details">
+                                    <h3>Configuration Change</h3>
+                                    <p>Configuration changed on Edge-Router-03 by user admin</p>
+                                    <div class="alert-meta">
+                                        <span class="alert-time"><i class="fas fa-clock"></i> 3 hours ago</span>
+                                        <span class="alert-source"><i class="fas fa-server"></i> Edge-Router-03</span>
+                                    </div>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn"><i class="fas fa-eye"></i> View</button>
+                                    <button class="btn"><i class="fas fa-check"></i> Acknowledge</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="pagination">
+                            <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <span class="page-ellipsis">...</span>
+                            <button class="page-btn">10</button>
+                            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Other Alert Tabs (placeholders) -->
+                    <div class="tab-content" id="history">
+                        <div class="placeholder-content">
+                            <h2>Alert History</h2>
+                            <p>View resolved and historical alerts</p>
+                            <!-- Alert history content would go here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="rules">
+                        <div class="placeholder-content">
+                            <h2>Alert Rules</h2>
+                            <p>Configure alert thresholds and notification settings</p>
+                            <!-- Alert rules content would go here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

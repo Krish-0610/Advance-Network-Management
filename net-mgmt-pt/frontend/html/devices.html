@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devices - Network Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>NetMgmt</h2>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li class="active"><a href="devices.html"><i class="fas fa-server"></i> Devices</a></li>
+                    <li><a href="topology.html"><i class="fas fa-project-diagram"></i> Topology</a></li>
+                    <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                    <li><a href="metrics.html"><i class="fas fa-chart-line"></i> Metrics</a></li>
+                    <li><a href="alerts.html"><i class="fas fa-bell"></i> Alerts</a></li>
+                    <li><a href="settings.html"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Network Management v1.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search devices, IPs...">
+                </div>
+                <div class="user-actions">
+                    <button class="btn refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Devices Section -->
+            <section class="devices-section" id="devices">
+                <div class="section-header-actions">
+                    <h1>Device Management</h1>
+                    <div class="device-actions">
+                        <button class="btn primary-btn"><i class="fas fa-plus"></i> Add Device</button>
+                        <button class="btn"><i class="fas fa-cog"></i> Bulk Actions</button>
+                        <button class="btn"><i class="fas fa-download"></i> Export</button>
+                    </div>
+                </div>
+                
+                <!-- Device Stats Overview -->
+                <div class="device-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Devices</h3>
+                            <span class="stat-value">48</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon online">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Online</h3>
+                            <span class="stat-value">43</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Warning</h3>
+                            <span class="stat-value">3</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon critical">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Offline</h3>
+                            <span class="stat-value">2</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Devices Filters -->
+                <div class="devices-filters">
+                    <div class="filter-group">
+                        <label>Device Type:</label>
+                        <select id="device-type-filter">
+                            <option value="all">All Types</option>
+                            <option value="routers">Routers</option>
+                            <option value="switches">Switches</option>
+                            <option value="firewalls">Firewalls</option>
+                            <option value="wireless">Wireless APs</option>
+                            <option value="servers">Servers</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="status-filter">
+                            <option value="all">All Status</option>
+                            <option value="online">Online</option>
+                            <option value="warning">Warning</option>
+                            <option value="offline">Offline</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Location:</label>
+                        <select id="location-filter">
+                            <option value="all">All Locations</option>
+                            <option value="headquarters">Headquarters</option>
+                            <option value="datacenter">Data Center</option>
+                            <option value="branch1">Branch Office 1</option>
+                            <option value="branch2">Branch Office 2</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group search">
+                        <input type="text" placeholder="Filter devices..." id="device-search">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Devices Table -->
+                <div class="devices-table-wrapper">
+                    <table class="devices-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select-all"></th>
+                                <th>Device Name</th>
+                                <th>IP Address</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Location</th>
+                                <th>Uptime</th>
+                                <th>Last Seen</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon router"></div>
+                                    <span>Core-Router-01</span>
+                                </td>
+                                <td>192.168.1.1</td>
+                                <td>Router</td>
+                                <td><span class="status-badge online">Online</span></td>
+                                <td>Headquarters</td>
+                                <td>43d 12h 36m</td>
+                                <td>Just now</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon firewall"></div>
+                                    <span>Firewall-Edge</span>
+                                </td>
+                                <td>192.168.1.2</td>
+                                <td>Firewall</td>
+                                <td><span class="status-badge online">Online</span></td>
+                                <td>Headquarters</td>
+                                <td>35d 8h 14m</td>
+                                <td>1m ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon switch"></div>
+                                    <span>Switch-Floor1</span>
+                                </td>
+                                <td>192.168.1.10</td>
+                                <td>Switch</td>
+                                <td><span class="status-badge online">Online</span></td>
+                                <td>Headquarters</td>
+                                <td>28d 3h 45m</td>
+                                <td>3m ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon switch"></div>
+                                    <span>Switch-Floor2</span>
+                                </td>
+                                <td>192.168.1.11</td>
+                                <td>Switch</td>
+                                <td><span class="status-badge warning">Warning</span></td>
+                                <td>Headquarters</td>
+                                <td>24d 18h 27m</td>
+                                <td>4m ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon wireless"></div>
+                                    <span>AP-Conference</span>
+                                </td>
+                                <td>192.168.1.50</td>
+                                <td>Wireless AP</td>
+                                <td><span class="status-badge online">Online</span></td>
+                                <td>Headquarters</td>
+                                <td>15d 9h 12m</td>
+                                <td>5m ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon server"></div>
+                                    <span>Web-Server-01</span>
+                                </td>
+                                <td>192.168.2.10</td>
+                                <td>Server</td>
+                                <td><span class="status-badge online">Online</span></td>
+                                <td>Data Center</td>
+                                <td>60d 4h 18m</td>
+                                <td>2m ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon server"></div>
+                                    <span>DB-Server-01</span>
+                                </td>
+                                <td>192.168.2.11</td>
+                                <td>Server</td>
+                                <td><span class="status-badge online">Online</span></td>
+                                <td>Data Center</td>
+                                <td>45d 12h 35m</td>
+                                <td>4m ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon switch"></div>
+                                    <span>Branch1-Switch</span>
+                                </td>
+                                <td>10.1.1.10</td>
+                                <td>Switch</td>
+                                <td><span class="status-badge online">Online</span></td>
+                                <td>Branch Office 1</td>
+                                <td>32d 5h 50m</td>
+                                <td>7m ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon router"></div>
+                                    <span>Branch1-Router</span>
+                                </td>
+                                <td>10.1.1.1</td>
+                                <td>Router</td>
+                                <td><span class="status-badge warning">Warning</span></td>
+                                <td>Branch Office 1</td>
+                                <td>25d 8h 12m</td>
+                                <td>10m ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="device-select"></td>
+                                <td class="device-name">
+                                    <div class="device-icon router"></div>
+                                    <span>Branch2-Router</span>
+                                </td>
+                                <td>10.2.1.1</td>
+                                <td>Router</td>
+                                <td><span class="status-badge critical">Offline</span></td>
+                                <td>Branch Office 2</td>
+                                <td>0d 0h 0m</td>
+                                <td>1d ago</td>
+                                <td class="action-buttons">
+                                    <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Configure"><i class="fas fa-cogs"></i></button>
+                                    <button class="action-btn" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="page-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <span class="page-separator">...</span>
+                    <button class="page-btn">10</button>
+                    <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                    
+                    <div class="page-size">
+                        <label>Rows per page:</label>
+                        <select id="page-size-select">
+                            <option value="10" selected>10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Device Details Modal (Hidden by default) -->
+            <div id="device-details-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Device Details: <span id="modal-device-name">Core-Router-01</span></h2>
+                        <button class="close-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="device-tabs">
+                            <button class="tab-btn active" data-tab="details">Details</button>
+                            <button class="tab-btn" data-tab="interfaces">Interfaces</button>
+                            <button class="tab-btn" data-tab="metrics">Metrics</button>
+                            <button class="tab-btn" data-tab="logs">Logs</button>
+                            <button class="tab-btn" data-tab="config">Configuration</button>
+                        </div>
+                        
+                        <!-- Details Tab -->
+                        <div class="tab-content active" id="details-tab">
+                            <div class="device-info-grid">
+                                <div class="device-info-card">
+                                    <h4>Basic Information</h4>
+                                    <div class="info-group">
+                                        <label>Hostname:</label>
+                                        <span>Core-Router-01</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>IP Address:</label>
+                                        <span>192.168.1.1</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>MAC Address:</label>
+                                        <span>00:1B:44:11:3A:B7</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Device Type:</label>
+                                        <span>Router</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Model:</label>
+                                        <span>Cisco ISR 4451</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Serial Number:</label>
+                                        <span>FTX1234ABCD</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="device-info-card">
+                                    <h4>Status Information</h4>
+                                    <div class="info-group">
+                                        <label>Status:</label>
+                                        <span class="status online">Online</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Uptime:</label>
+                                        <span>43 days, 12 hours, 36 minutes</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Last Seen:</label>
+                                        <span>Just now</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Last Reboot:</label>
+                                        <span>Aug 15, 2023 09:24 AM</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>CPU Load:</label>
+                                        <div class="progress-bar small">
+                                            <div class="progress" style="width: 15%;"></div>
+                                            <span>15%</span>
+                                        </div>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Memory Usage:</label>
+                                        <div class="progress-bar small">
+                                            <div class="progress" style="width: 45%;"></div>
+                                            <span>45%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="device-info-card">
+                                    <h4>Software Information</h4>
+                                    <div class="info-group">
+                                        <label>OS Type:</label>
+                                        <span>IOS-XE</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>OS Version:</label>
+                                        <span>16.9.3</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Firmware:</label>
+                                        <span>15.0(1r)SG7</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Last Updated:</label>
+                                        <span>Jun 12, 2023</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="device-info-card">
+                                    <h4>Location Information</h4>
+                                    <div class="info-group">
+                                        <label>Location:</label>
+                                        <span>Headquarters</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Building:</label>
+                                        <span>Main Building</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Floor:</label>
+                                        <span>1st Floor</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Room:</label>
+                                        <span>Server Room</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <label>Rack:</label>
+                                        <span>Rack A3, Position 4U</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Interfaces Tab (Placeholder) -->
+                        <div class="tab-content" id="interfaces-tab" style="display: none;">
+                            <div class="interfaces-list">
+                                <h4>Device Interfaces</h4>
+                                <table class="interfaces-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Interface</th>
+                                            <th>IP Address</th>
+                                            <th>MAC Address</th>
+                                            <th>Status</th>
+                                            <th>Speed</th>
+                                            <th>Duplex</th>
+                                            <th>Traffic In</th>
+                                            <th>Traffic Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>GigabitEthernet0/0</td>
+                                            <td>192.168.1.1/24</td>
+                                            <td>00:1B:44:11:3A:B7</td>
+                                            <td><span class="status-badge online">Up</span></td>
+                                            <td>1 Gbps</td>
+                                            <td>Full</td>
+                                            <td>28.5 Mbps</td>
+                                            <td>12.3 Mbps</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GigabitEthernet0/1</td>
+                                            <td>10.0.0.1/30</td>
+                                            <td>00:1B:44:11:3A:B8</td>
+                                            <td><span class="status-badge online">Up</span></td>
+                                            <td>1 Gbps</td>
+                                            <td>Full</td>
+                                            <td>125.7 Mbps</td>
+                                            <td>89.4 Mbps</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GigabitEthernet0/2</td>
+                                            <td>172.16.1.1/24</td>
+                                            <td>00:1B:44:11:3A:B9</td>
+                                            <td><span class="status-badge online">Up</span></td>
+                                            <td>1 Gbps</td>
+                                            <td>Full</td>
+                                            <td>42.1 Mbps</td>
+                                            <td>37.8 Mbps</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GigabitEthernet0/3</td>
+                                            <td>-</td>
+                                            <td>00:1B:44:11:3A:BA</td>
+                                            <td><span class="status-badge offline">Down</span></td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>0 Mbps</td>
+                                            <td>0 Mbps</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Placeholder for other tabs (metrics, logs, config) -->
+                        <div class="tab-content" id="metrics-tab" style="display: none;">
+                            <div class="metrics-placeholder">
+                                <h4>Performance Metrics</h4>
+                                <p>Metrics visualization would be displayed here</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="logs-tab" style="display: none;">
+                            <div class="logs-placeholder">
+                                <h4>Device Logs</h4>
+                                <p>Device logs would be displayed here</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="config-tab" style="display: none;">
+                            <div class="config-placeholder">
+                                <h4>Device Configuration</h4>
+                                <p>Configuration details would be displayed here</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button class="btn"><i class="fas fa-edit"></i> Edit Device</button>
+                        <button class="btn"><i class="fas fa-cogs"></i> Configure</button>
+                        <button class="btn"><i class="fas fa-power-off"></i> Reboot</button>
+                        <button class="btn cancel-btn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Javascript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/devices.js"></script>
+</body>
+</html> 

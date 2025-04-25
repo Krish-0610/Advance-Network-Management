@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics - Network Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for metrics visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>NetMgmt</h2>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="devices.html"><i class="fas fa-server"></i> Devices</a></li>
+                    <li><a href="topology.html"><i class="fas fa-project-diagram"></i> Topology</a></li>
+                    <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                    <li class="active"><a href="metrics.html"><i class="fas fa-chart-line"></i> Metrics</a></li>
+                    <li><a href="alerts.html"><i class="fas fa-bell"></i> Alerts</a></li>
+                    <li><a href="settings.html"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Network Management v1.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search metrics...">
+                </div>
+                <div class="user-actions">
+                    <button class="btn refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Metrics Section -->
+            <section class="metrics-section">
+                <div class="metrics-header">
+                    <h1>Network Metrics</h1>
+                    <div class="metrics-time-controls">
+                        <button class="time-btn active">Last 24h</button>
+                        <button class="time-btn">Last 7d</button>
+                        <button class="time-btn">Last 30d</button>
+                        <button class="time-btn">Custom</button>
+                        <button class="btn export-btn"><i class="fas fa-download"></i> Export</button>
+                    </div>
+                </div>
+                
+                <!-- Metrics Overview Cards -->
+                <div class="metrics-overview">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <div class="metric-details">
+                            <h3>Network Availability</h3>
+                            <div class="metric-value">99.98%</div>
+                            <div class="metric-trend positive">
+                                <i class="fas fa-arrow-up"></i> 0.03%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="metric-details">
+                            <h3>Average Latency</h3>
+                            <div class="metric-value">12.3 ms</div>
+                            <div class="metric-trend negative">
+                                <i class="fas fa-arrow-up"></i> 1.2 ms
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="metric-details">
+                            <h3>Bandwidth Utilization</h3>
+                            <div class="metric-value">65.2%</div>
+                            <div class="metric-trend negative">
+                                <i class="fas fa-arrow-up"></i> 3.8%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="metric-details">
+                            <h3>Packet Loss</h3>
+                            <div class="metric-value">0.05%</div>
+                            <div class="metric-trend positive">
+                                <i class="fas fa-arrow-down"></i> 0.02%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Metrics Tabs -->
+                <div class="metrics-tabs">
+                    <ul class="tabs">
+                        <li class="tab active" data-tab="performance">Performance</li>
+                        <li class="tab" data-tab="traffic">Traffic Analysis</li>
+                        <li class="tab" data-tab="health">Health Metrics</li>
+                        <li class="tab" data-tab="custom">Custom Metrics</li>
+                    </ul>
+                </div>
+                
+                <!-- Metrics Content -->
+                <div class="metrics-content">
+                    <!-- Performance Tab -->
+                    <div class="tab-content active" id="performance">
+                        <div class="filter-section">
+                            <div class="filter-group">
+                                <label>Filter by Device:</label>
+                                <select class="form-control">
+                                    <option>All Devices</option>
+                                    <option>Core Routers</option>
+                                    <option>Distribution Switches</option>
+                                    <option>Access Switches</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Metric Type:</label>
+                                <select class="form-control">
+                                    <option>All Metrics</option>
+                                    <option>CPU Utilization</option>
+                                    <option>Memory Usage</option>
+                                    <option>Interface Errors</option>
+                                </select>
+                            </div>
+                            <button class="btn filter-btn"><i class="fas fa-filter"></i> Apply Filters</button>
+                        </div>
+                        
+                        <!-- Performance Charts -->
+                        <div class="chart-container">
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h3>CPU Utilization</h3>
+                                    <div class="chart-actions">
+                                        <button class="action-btn" title="Expand"><i class="fas fa-expand"></i></button>
+                                        <button class="action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                        <button class="action-btn" title="Settings"><i class="fas fa-cog"></i></button>
+                                    </div>
+                                </div>
+                                <div class="chart-body">
+                                    <canvas id="cpuChart" height="250"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h3>Memory Usage</h3>
+                                    <div class="chart-actions">
+                                        <button class="action-btn" title="Expand"><i class="fas fa-expand"></i></button>
+                                        <button class="action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                        <button class="action-btn" title="Settings"><i class="fas fa-cog"></i></button>
+                                    </div>
+                                </div>
+                                <div class="chart-body">
+                                    <canvas id="memoryChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h3>Interface Errors</h3>
+                                    <div class="chart-actions">
+                                        <button class="action-btn" title="Expand"><i class="fas fa-expand"></i></button>
+                                        <button class="action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                        <button class="action-btn" title="Settings"><i class="fas fa-cog"></i></button>
+                                    </div>
+                                </div>
+                                <div class="chart-body">
+                                    <canvas id="errorsChart" height="250"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h3>Uptime</h3>
+                                    <div class="chart-actions">
+                                        <button class="action-btn" title="Expand"><i class="fas fa-expand"></i></button>
+                                        <button class="action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                        <button class="action-btn" title="Settings"><i class="fas fa-cog"></i></button>
+                                    </div>
+                                </div>
+                                <div class="chart-body">
+                                    <canvas id="uptimeChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Other Metric Tabs (placeholders) -->
+                    <div class="tab-content" id="traffic">
+                        <div class="placeholder-content">
+                            <h2>Traffic Analysis</h2>
+                            <p>Analyze network traffic patterns, flows, and bandwidth utilization</p>
+                            <!-- Traffic analysis content would go here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="health">
+                        <div class="placeholder-content">
+                            <h2>Health Metrics</h2>
+                            <p>Monitor overall health indicators of network devices and services</p>
+                            <!-- Health metrics content would go here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="custom">
+                        <div class="placeholder-content">
+                            <h2>Custom Metrics</h2>
+                            <p>Configure and view custom metrics for specific network monitoring needs</p>
+                            <!-- Custom metrics content would go here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/charts.js"></script>
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Initialize sample charts
+            // CPU Chart
+            const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+            const cpuChart = new Chart(cpuCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
+                    datasets: [{
+                        label: 'Core Router 1',
+                        data: [25, 30, 45, 60, 78, 65, 40, 35],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Edge Router 2',
+                        data: [15, 20, 35, 45, 55, 50, 30, 25],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+            
+            // Memory Chart
+            const memCtx = document.getElementById('memoryChart').getContext('2d');
+            const memChart = new Chart(memCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
+                    datasets: [{
+                        label: 'Core Router 1',
+                        data: [40, 42, 45, 50, 55, 58, 56, 52],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Edge Router 2',
+                        data: [30, 32, 36, 42, 45, 44, 40, 38],
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+            
+            // Errors Chart
+            const errorsCtx = document.getElementById('errorsChart').getContext('2d');
+            const errorsChart = new Chart(errorsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Port 1', 'Port 2', 'Port 3', 'Port 4', 'Port 5', 'Port 6'],
+                    datasets: [{
+                        label: 'Input Errors',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                    },
+                    {
+                        label: 'Output Errors',
+                        data: [8, 15, 5, 2, 1, 2],
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Uptime Chart
+            const uptimeCtx = document.getElementById('uptimeChart').getContext('2d');
+            const uptimeChart = new Chart(uptimeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['> 99.9%', '99.0% - 99.9%', '< 99.0%'],
+                    datasets: [{
+                        data: [23, 5, 2],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(255, 99, 132, 0.7)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

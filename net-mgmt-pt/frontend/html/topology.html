@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Topology - Network Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- <link rel="stylesheet" href="css/topology.css"> -->
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>NetMgmt</h2>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="devices.html"><i class="fas fa-server"></i> Devices</a></li>
+                    <li class="active"><a href="topology.html"><i class="fas fa-project-diagram"></i> Topology</a></li>
+                    <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                    <li><a href="metrics.html"><i class="fas fa-chart-line"></i> Metrics</a></li>
+                    <li><a href="alerts.html"><i class="fas fa-bell"></i> Alerts</a></li>
+                    <li><a href="settings.html"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Network Management v1.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search devices, IPs, services...">
+                </div>
+                <div class="user-actions">
+                    <button class="btn refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Topology Section -->
+            <section class="topology-section" id="topology">
+                <div class="section-header-actions">
+                    <h1>Network Topology</h1>
+                    <div class="topology-controls">
+                        <div class="layout-options">
+                            <button class="btn-sm active" data-layout="force"><i class="fas fa-project-diagram"></i> Force</button>
+                            <button class="btn-sm" data-layout="hierarchical"><i class="fas fa-sitemap"></i> Hierarchical</button>
+                            <button class="btn-sm" data-layout="circular"><i class="fas fa-circle-notch"></i> Circular</button>
+                        </div>
+                        <div class="view-options">
+                            <button class="btn-sm active" data-view="logical"><i class="fas fa-network-wired"></i> Logical</button>
+                            <button class="btn-sm" data-view="physical"><i class="fas fa-map-marker-alt"></i> Physical</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topology-container">
+                    <div class="topology-sidebar">
+                        <div class="topology-filters">
+                            <h3>Filters</h3>
+                            <div class="filter-group">
+                                <label>Device Type</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="router" checked>
+                                        <label for="router">Routers</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="switch" checked>
+                                        <label for="switch">Switches</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="firewall" checked>
+                                        <label for="firewall">Firewalls</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="access-point" checked>
+                                        <label for="access-point">Access Points</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="server" checked>
+                                        <label for="server">Servers</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="client" checked>
+                                        <label for="client">Clients</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Status</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="active" checked>
+                                        <label for="active">Active</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="warning" checked>
+                                        <label for="warning">Warning</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="critical" checked>
+                                        <label for="critical">Critical</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="maintenance" checked>
+                                        <label for="maintenance">Maintenance</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Connection Type</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="ethernet" checked>
+                                        <label for="ethernet">Ethernet</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="fiber" checked>
+                                        <label for="fiber">Fiber</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="wireless" checked>
+                                        <label for="wireless">Wireless</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topology-legend">
+                            <h3>Legend</h3>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <div class="legend-icon router"></div>
+                                    <span>Router</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-icon switch"></div>
+                                    <span>Switch</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-icon firewall"></div>
+                                    <span>Firewall</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-icon access-point"></div>
+                                    <span>Access Point</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-icon server"></div>
+                                    <span>Server</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-icon client"></div>
+                                    <span>Client</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-line ethernet"></div>
+                                    <span>Ethernet</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-line fiber"></div>
+                                    <span>Fiber</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-line wireless"></div>
+                                    <span>Wireless</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="topology-canvas-container">
+                        <div class="topology-actions">
+                            <button class="btn-sm" id="zoom-in"><i class="fas fa-search-plus"></i></button>
+                            <button class="btn-sm" id="zoom-out"><i class="fas fa-search-minus"></i></button>
+                            <button class="btn-sm" id="zoom-reset"><i class="fas fa-expand"></i></button>
+                            <button class="btn-sm" id="fit-view"><i class="fas fa-compress"></i></button>
+                            <button class="btn-sm" id="export-topology"><i class="fas fa-download"></i></button>
+                        </div>
+                        <div id="topology-canvas"></div>
+                    </div>
+
+                    <div class="topology-details">
+                        <div class="detail-header">
+                            <h3>Selected Device</h3>
+                            <button class="btn-sm close-details"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div id="device-details">
+                            <p class="select-device-message">Select a device to view details</p>
+                            <div class="device-info" style="display: none;">
+                                <div class="device-title">
+                                    <i class="fas fa-server"></i>
+                                    <h4>Router-Main</h4>
+                                </div>
+                                <div class="device-status active">
+                                    <span>Active</span>
+                                </div>
+                                <div class="device-props">
+                                    <div class="prop">
+                                        <span class="prop-name">IP Address</span>
+                                        <span class="prop-value">192.168.1.1</span>
+                                    </div>
+                                    <div class="prop">
+                                        <span class="prop-name">MAC Address</span>
+                                        <span class="prop-value">00:0A:95:9D:68:16</span>
+                                    </div>
+                                    <div class="prop">
+                                        <span class="prop-name">Location</span>
+                                        <span class="prop-value">Data Center</span>
+                                    </div>
+                                    <div class="prop">
+                                        <span class="prop-name">Uptime</span>
+                                        <span class="prop-value">15 days, 7 hours</span>
+                                    </div>
+                                    <div class="prop">
+                                        <span class="prop-name">CPU Usage</span>
+                                        <span class="prop-value">34%</span>
+                                    </div>
+                                    <div class="prop">
+                                        <span class="prop-name">Memory Usage</span>
+                                        <span class="prop-value">1.2GB / 4GB</span>
+                                    </div>
+                                    <div class="prop">
+                                        <span class="prop-name">Firmware</span>
+                                        <span class="prop-value">v2.3.4</span>
+                                    </div>
+                                </div>
+                                <div class="device-links">
+                                    <button class="btn-sm"><i class="fas fa-terminal"></i> Console</button>
+                                    <button class="btn-sm"><i class="fas fa-cog"></i> Configure</button>
+                                    <button class="btn-sm"><i class="fas fa-history"></i> History</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Javascript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/topology.js"></script>
+</body>
+</html> 

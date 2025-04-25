@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Network Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>NetMgmt</h2>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="devices.html"><i class="fas fa-server"></i> Devices</a></li>
+                    <li><a href="topology.html"><i class="fas fa-project-diagram"></i> Topology</a></li>
+                    <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                    <li><a href="metrics.html"><i class="fas fa-chart-line"></i> Metrics</a></li>
+                    <li><a href="alerts.html"><i class="fas fa-bell"></i> Alerts</a></li>
+                    <li class="active"><a href="settings.html"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Network Management v1.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search settings...">
+                </div>
+                <div class="user-actions">
+                    <button class="btn refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Settings Section -->
+            <section class="settings-section">
+                <h1>System Settings</h1>
+                
+                <!-- Settings Navigation -->
+                <div class="settings-navigation">
+                    <ul class="tabs">
+                        <li class="tab active" data-tab="general">General</li>
+                        <li class="tab" data-tab="user-management">User Management</li>
+                        <li class="tab" data-tab="notifications">Notifications</li>
+                        <li class="tab" data-tab="security">Security</li>
+                        <li class="tab" data-tab="backups">Backups & Maintenance</li>
+                        <li class="tab" data-tab="api">API & Integrations</li>
+                    </ul>
+                </div>
+                
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- General Settings -->
+                    <div class="tab-content active" id="general">
+                        <div class="settings-card">
+                            <h2>System Information</h2>
+                            <div class="form-group">
+                                <label>System Name</label>
+                                <input type="text" value="Network Management Dashboard" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Current Version</label>
+                                <input type="text" value="1.0" class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Timezone</label>
+                                <select class="form-control">
+                                    <option>UTC (Coordinated Universal Time)</option>
+                                    <option>EST (Eastern Standard Time)</option>
+                                    <option>PST (Pacific Standard Time)</option>
+                                    <option>GMT (Greenwich Mean Time)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date Format</label>
+                                <select class="form-control">
+                                    <option>MM/DD/YYYY</option>
+                                    <option>DD/MM/YYYY</option>
+                                    <option>YYYY-MM-DD</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button class="btn primary-btn">Save Changes</button>
+                                <button class="btn">Reset</button>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h2>Discovery Settings</h2>
+                            <div class="form-group">
+                                <label>Auto-Discovery Schedule</label>
+                                <select class="form-control">
+                                    <option>Every 6 hours</option>
+                                    <option>Every 12 hours</option>
+                                    <option>Daily</option>
+                                    <option>Weekly</option>
+                                    <option>Manual Only</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>IP Range for Discovery</label>
+                                <input type="text" value="192.168.0.0/24" class="form-control">
+                            </div>
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="discover-new" checked>
+                                <label for="discover-new">Auto-add new devices</label>
+                            </div>
+                            <div class="form-actions">
+                                <button class="btn primary-btn">Save Changes</button>
+                                <button class="btn">Run Discovery Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Management Placeholder -->
+                    <div class="tab-content" id="user-management">
+                        <div class="settings-card">
+                            <h2>User Accounts</h2>
+                            <div class="user-list">
+                                <div class="user-table-header">
+                                    <div class="user-table-actions">
+                                        <button class="btn primary-btn"><i class="fas fa-plus"></i> Add User</button>
+                                        <div class="search-box">
+                                            <input type="text" placeholder="Search users..." class="form-control">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Name</th>
+                                            <th>Role</th>
+                                            <th>Email</th>
+                                            <th>Last Login</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>admin</td>
+                                            <td>System Administrator</td>
+                                            <td>Administrator</td>
+                                            <td>admin@example.com</td>
+                                            <td>Today, 10:23 AM</td>
+                                            <td><span class="status-badge online">Active</span></td>
+                                            <td class="action-buttons">
+                                                <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                                <button class="action-btn" title="Reset Password"><i class="fas fa-key"></i></button>
+                                                <button class="action-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>jsmith</td>
+                                            <td>John Smith</td>
+                                            <td>Network Technician</td>
+                                            <td>jsmith@example.com</td>
+                                            <td>Yesterday, 3:45 PM</td>
+                                            <td><span class="status-badge online">Active</span></td>
+                                            <td class="action-buttons">
+                                                <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                                <button class="action-btn" title="Reset Password"><i class="fas fa-key"></i></button>
+                                                <button class="action-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h2>Role Management</h2>
+                            <div class="role-management">
+                                <button class="btn primary-btn"><i class="fas fa-plus"></i> Create Role</button>
+                                <div class="role-list">
+                                    <div class="role-item">
+                                        <div class="role-header">
+                                            <h3>Administrator</h3>
+                                            <div class="role-actions">
+                                                <button class="btn small-btn">Edit</button>
+                                                <button class="btn small-btn">Delete</button>
+                                            </div>
+                                        </div>
+                                        <p>Full system access with all privileges</p>
+                                    </div>
+                                    <div class="role-item">
+                                        <div class="role-header">
+                                            <h3>Network Technician</h3>
+                                            <div class="role-actions">
+                                                <button class="btn small-btn">Edit</button>
+                                                <button class="btn small-btn">Delete</button>
+                                            </div>
+                                        </div>
+                                        <p>Can view and manage devices and alerts</p>
+                                    </div>
+                                    <div class="role-item">
+                                        <div class="role-header">
+                                            <h3>Read Only</h3>
+                                            <div class="role-actions">
+                                                <button class="btn small-btn">Edit</button>
+                                                <button class="btn small-btn">Delete</button>
+                                            </div>
+                                        </div>
+                                        <p>View-only access to dashboards and metrics</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Other tab contents (placeholders) -->
+                    <div class="tab-content" id="notifications">
+                        <div class="settings-card">
+                            <h2>Notification Settings</h2>
+                            <p>Configure how and when notifications are sent</p>
+                            <!-- Notification settings would go here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="security">
+                        <div class="settings-card">
+                            <h2>Security Settings</h2>
+                            <p>Configure password policies, MFA, and access controls</p>
+                            <!-- Security settings would go here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="backups">
+                        <div class="settings-card">
+                            <h2>Backup & Maintenance</h2>
+                            <p>Schedule backups and system maintenance</p>
+                            <!-- Backup settings would go here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="api">
+                        <div class="settings-card">
+                            <h2>API & Integrations</h2>
+                            <p>Manage API keys and third-party integrations</p>
+                            <!-- API settings would go here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Management Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>NetMgmt</h2>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="devices.html"><i class="fas fa-server"></i> Devices</a></li>
+                    <li><a href="topology.html"><i class="fas fa-project-diagram"></i> Topology</a></li>
+                    <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                    <li><a href="metrics.html"><i class="fas fa-chart-line"></i> Metrics</a></li>
+                    <li><a href="alerts.html"><i class="fas fa-bell"></i> Alerts</a></li>
+                    <li><a href="settings.html"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Network Management v1.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search devices, IPs, services...">
+                </div>
+                <div class="user-actions">
+                    <button class="btn refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Overview -->
+            <section class="dashboard-section" id="dashboard">
+                <h1>Network Dashboard</h1>
+                <div class="stats-cards">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>45</h3>
+                            <p>Active Devices</p>
+                        </div>
+                        <div class="card-status up">
+                            <span>+2</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>3</h3>
+                            <p>Critical Alerts</p>
+                        </div>
+                        <div class="card-status down">
+                            <span>+1</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>432 MB/s</h3>
+                            <p>Network Traffic</p>
+                        </div>
+                        <div class="card-status up">
+                            <span>12%</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>68%</h3>
+                            <p>CPU Usage</p>
+                        </div>
+                        <div class="card-status neutral">
+                            <span>-3%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Health -->
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Network Health</h3>
+                            <div class="chart-actions">
+                                <button class="btn-sm">Day</button>
+                                <button class="btn-sm active">Week</button>
+                                <button class="btn-sm">Month</button>
+                            </div>
+                        </div>
+                        <div class="chart" id="networkHealthChart"></div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Traffic Analysis</h3>
+                            <div class="chart-actions">
+                                <button class="btn-sm">Day</button>
+                                <button class="btn-sm active">Week</button>
+                                <button class="btn-sm">Month</button>
+                            </div>
+                        </div>
+                        <div class="chart" id="trafficChart"></div>
+                    </div>
+                </div>
+
+                <!-- Recent Alerts -->
+                <div class="recent-alerts">
+                    <div class="section-header">
+                        <h3>Recent Alerts</h3>
+                        <a href="alerts.html" class="view-all">View All</a>
+                    </div>
+                    <div class="alerts-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Device</th>
+                                    <th>Issue</th>
+                                    <th>Time</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="status-badge critical">Critical</span></td>
+                                    <td>Router-Main</td>
+                                    <td>High CPU Usage</td>
+                                    <td>10 min ago</td>
+                                    <td><button class="btn-action">Resolve</button></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="status-badge warning">Warning</span></td>
+                                    <td>Switch-Floor2</td>
+                                    <td>Port Errors</td>
+                                    <td>45 min ago</td>
+                                    <td><button class="btn-action">Resolve</button></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="status-badge critical">Critical</span></td>
+                                    <td>Firewall-Edge</td>
+                                    <td>Multiple Connection Failures</td>
+                                    <td>1 hour ago</td>
+                                    <td><button class="btn-action">Resolve</button></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="status-badge info">Info</span></td>
+                                    <td>AP-Conference</td>
+                                    <td>Firmware Update Available</td>
+                                    <td>3 hours ago</td>
+                                    <td><button class="btn-action">Update</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <div class="section-header">
+                        <h3>Quick Actions</h3>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="topology.html" class="action-button">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>View Topology</span>
+                        </a>
+                        <a href="devices.html" class="action-button">
+                            <i class="fas fa-server"></i>
+                            <span>Manage Devices</span>
+                        </a>
+                        <a href="configuration.html" class="action-button">
+                            <i class="fas fa-tasks"></i>
+                            <span>Run Diagnostics</span>
+                        </a>
+                        <a href="alerts.html" class="action-button">
+                            <i class="fas fa-bell"></i>
+                            <span>Manage Alerts</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Javascript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html> 

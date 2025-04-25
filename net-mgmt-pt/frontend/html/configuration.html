@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration - Network Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CodeMirror for config editing -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/yaml/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>NetMgmt</h2>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="devices.html"><i class="fas fa-server"></i> Devices</a></li>
+                    <li><a href="topology.html"><i class="fas fa-project-diagram"></i> Topology</a></li>
+                    <li class="active"><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                    <li><a href="metrics.html"><i class="fas fa-chart-line"></i> Metrics</a></li>
+                    <li><a href="alerts.html"><i class="fas fa-bell"></i> Alerts</a></li>
+                    <li><a href="settings.html"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Network Management v1.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search configurations, devices...">
+                </div>
+                <div class="user-actions">
+                    <button class="btn refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Configuration Management Section -->
+            <section class="config-section" id="configuration">
+                <div class="section-header-actions">
+                    <h1>Configuration Management</h1>
+                    <div class="config-actions">
+                        <button class="btn"><i class="fas fa-plus"></i> New Config</button>
+                        <button class="btn"><i class="fas fa-upload"></i> Import</button>
+                        <button class="btn"><i class="fas fa-cog"></i> Settings</button>
+                    </div>
+                </div>
+
+                <!-- Configuration Overview Cards -->
+                <div class="config-overview">
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-file-code"></i>
+                        </div>
+                        <div class="config-data">
+                            <h3>Total Configs</h3>
+                            <div class="config-value">145</div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="config-data">
+                            <h3>Config Backups</h3>
+                            <div class="config-value">723</div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="config-data">
+                            <h3>Config Issues</h3>
+                            <div class="config-value warning">8</div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="config-data">
+                            <h3>Recent Changes</h3>
+                            <div class="config-value">12</div>
+                            <p class="config-info">Last 24h</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Configuration Management Tabs -->
+                <div class="config-tabs">
+                    <button class="tab-btn active" data-tab="devices">Device Configs</button>
+                    <button class="tab-btn" data-tab="templates">Templates</button>
+                    <button class="tab-btn" data-tab="backups">Backups</button>
+                    <button class="tab-btn" data-tab="compliance">Compliance</button>
+                    <button class="tab-btn" data-tab="automation">Automation</button>
+                </div>
+                
+                <!-- Config Filter -->
+                <div class="config-filters">
+                    <div class="filter-group">
+                        <label>Device Type:</label>
+                        <select id="device-type-filter">
+                            <option value="all">All Types</option>
+                            <option value="router">Routers</option>
+                            <option value="switch">Switches</option>
+                            <option value="firewall">Firewalls</option>
+                            <option value="accesspoint">Access Points</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Vendor:</label>
+                        <select id="vendor-filter">
+                            <option value="all">All Vendors</option>
+                            <option value="cisco">Cisco</option>
+                            <option value="juniper">Juniper</option>
+                            <option value="arista">Arista</option>
+                            <option value="fortinet">Fortinet</option>
+                            <option value="paloalto">Palo Alto</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Location:</label>
+                        <select id="location-filter">
+                            <option value="all">All Locations</option>
+                            <option value="headquarters">Headquarters</option>
+                            <option value="datacenter">Data Center</option>
+                            <option value="branch1">Branch Office 1</option>
+                            <option value="branch2">Branch Office 2</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="status-filter">
+                            <option value="all">All Status</option>
+                            <option value="synced">In Sync</option>
+                            <option value="outofdate">Out of Date</option>
+                            <option value="modified">Modified</option>
+                            <option value="error">Error</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn filter-btn"><i class="fas fa-filter"></i> Apply Filters</button>
+                </div>
+                
+                <!-- Device Configs Table -->
+                <div class="config-table-container active" id="devices-tab">
+                    <table class="config-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="select-all">
+                                </th>
+                                <th>Device Name</th>
+                                <th>Device Type</th>
+                                <th>IP Address</th>
+                                <th>Last Backup</th>
+                                <th>Status</th>
+                                <th>Compliance</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="row-checkbox">
+                                </td>
+                                <td>Core-Router-01</td>
+                                <td>Router</td>
+                                <td>192.168.1.1</td>
+                                <td>Today, 08:45 AM</td>
+                                <td><span class="status-badge synced">In Sync</span></td>
+                                <td>
+                                    <div class="compliance-indicator">
+                                        <div class="compliance-bar">
+                                            <div class="compliance-progress excellent" style="width: 100%"></div>
+                                        </div>
+                                        <span>100%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-btn" title="View Config"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit Config"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Backup Now"><i class="fas fa-download"></i></button>
+                                    <button class="action-btn" title="Deploy Config"><i class="fas fa-upload"></i></button>
+                                    <button class="action-btn" title="History"><i class="fas fa-history"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="row-checkbox">
+                                </td>
+                                <td>Edge-Firewall-01</td>
+                                <td>Firewall</td>
+                                <td>192.168.1.254</td>
+                                <td>Today, 07:30 AM</td>
+                                <td><span class="status-badge modified">Modified</span></td>
+                                <td>
+                                    <div class="compliance-indicator">
+                                        <div class="compliance-bar">
+                                            <div class="compliance-progress good" style="width: 92%"></div>
+                                        </div>
+                                        <span>92%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-btn" title="View Config"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit Config"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Backup Now"><i class="fas fa-download"></i></button>
+                                    <button class="action-btn" title="Deploy Config"><i class="fas fa-upload"></i></button>
+                                    <button class="action-btn" title="History"><i class="fas fa-history"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="row-checkbox">
+                                </td>
+                                <td>Access-Switch-Floor1</td>
+                                <td>Switch</td>
+                                <td>192.168.2.10</td>
+                                <td>Today, 09:15 AM</td>
+                                <td><span class="status-badge synced">In Sync</span></td>
+                                <td>
+                                    <div class="compliance-indicator">
+                                        <div class="compliance-bar">
+                                            <div class="compliance-progress excellent" style="width: 100%"></div>
+                                        </div>
+                                        <span>100%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-btn" title="View Config"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit Config"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Backup Now"><i class="fas fa-download"></i></button>
+                                    <button class="action-btn" title="Deploy Config"><i class="fas fa-upload"></i></button>
+                                    <button class="action-btn" title="History"><i class="fas fa-history"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="row-checkbox">
+                                </td>
+                                <td>Access-Switch-Floor2</td>
+                                <td>Switch</td>
+                                <td>192.168.2.11</td>
+                                <td>2 days ago</td>
+                                <td><span class="status-badge outofdate">Out of Date</span></td>
+                                <td>
+                                    <div class="compliance-indicator">
+                                        <div class="compliance-bar">
+                                            <div class="compliance-progress fair" style="width: 85%"></div>
+                                        </div>
+                                        <span>85%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-btn" title="View Config"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit Config"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Backup Now"><i class="fas fa-download"></i></button>
+                                    <button class="action-btn" title="Deploy Config"><i class="fas fa-upload"></i></button>
+                                    <button class="action-btn" title="History"><i class="fas fa-history"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="row-checkbox">
+                                </td>
+                                <td>Wireless-Controller</td>
+                                <td>Access Point Controller</td>
+                                <td>192.168.3.50</td>
+                                <td>Today, 10:30 AM</td>
+                                <td><span class="status-badge error">Error</span></td>
+                                <td>
+                                    <div class="compliance-indicator">
+                                        <div class="compliance-bar">
+                                            <div class="compliance-progress warning" style="width: 68%"></div>
+                                        </div>
+                                        <span>68%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-btn" title="View Config"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit Config"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Backup Now"><i class="fas fa-download"></i></button>
+                                    <button class="action-btn" title="Deploy Config"><i class="fas fa-upload"></i></button>
+                                    <button class="action-btn" title="History"><i class="fas fa-history"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="config-batch-actions">
+                        <button class="btn"><i class="fas fa-download"></i> Backup Selected</button>
+                        <button class="btn"><i class="fas fa-upload"></i> Deploy Selected</button>
+                        <button class="btn"><i class="fas fa-file-export"></i> Export Selected</button>
+                    </div>
+                    
+                    <!-- Config pagination -->
+                    <div class="pagination">
+                        <button class="page-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <span class="page-separator">...</span>
+                        <button class="page-btn">10</button>
+                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                        
+                        <div class="page-size">
+                            <label>Rows per page:</label>
+                            <select id="page-size-select">
+                                <option value="5" selected>5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other tabs would be hidden by default -->
+                <div class="config-table-container" id="templates-tab" style="display: none;">
+                    <!-- Templates table would go here -->
+                </div>
+                
+                <div class="config-table-container" id="backups-tab" style="display: none;">
+                    <!-- Backups table would go here -->
+                </div>
+                
+                <div class="config-table-container" id="compliance-tab" style="display: none;">
+                    <!-- Compliance table would go here -->
+                </div>
+                
+                <div class="config-table-container" id="automation-tab" style="display: none;">
+                    <!-- Automation table would go here -->
+                </div>
+                
+                <!-- Recent Config Activity -->
+                <div class="recent-activity-section">
+                    <div class="section-header">
+                        <h2>Recent Configuration Activity</h2>
+                        <button class="btn btn-sm"><i class="fas fa-external-link-alt"></i> View All</button>
+                    </div>
+                    
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon deploy">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-header">
+                                    <h4>Configuration Deployed</h4>
+                                    <span class="activity-time">Today, 10:15 AM</span>
+                                </div>
+                                <p class="activity-description">
+                                    <strong>Admin</strong> deployed configuration to <strong>Core-Router-01</strong>
+                                </p>
+                                <div class="activity-meta">
+                                    <span class="meta-item"><i class="fas fa-check-circle"></i> Successful</span>
+                                    <span class="meta-item"><i class="fas fa-clock"></i> 45s duration</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon edit">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-header">
+                                    <h4>Configuration Modified</h4>
+                                    <span class="activity-time">Today, 09:45 AM</span>
+                                </div>
+                                <p class="activity-description">
+                                    <strong>Admin</strong> modified configuration for <strong>Edge-Firewall-01</strong>
+                                </p>
+                                <div class="activity-meta">
+                                    <span class="meta-item"><i class="fas fa-info-circle"></i> 8 lines changed</span>
+                                    <span class="meta-item"><i class="fas fa-tags"></i> firewall rules</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon backup">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-header">
+                                    <h4>Backup Completed</h4>
+                                    <span class="activity-time">Today, 09:15 AM</span>
+                                </div>
+                                <p class="activity-description">
+                                    <strong>System</strong> created backup for <strong>Access-Switch-Floor1</strong>
+                                </p>
+                                <div class="activity-meta">
+                                    <span class="meta-item"><i class="fas fa-check-circle"></i> Successful</span>
+                                    <span class="meta-item"><i class="fas fa-file-alt"></i> 25 KB</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon error">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-header">
+                                    <h4>Backup Failed</h4>
+                                    <span class="activity-time">Today, 08:30 AM</span>
+                                </div>
+                                <p class="activity-description">
+                                    <strong>System</strong> failed to backup <strong>Wireless-Controller</strong>
+                                </p>
+                                <div class="activity-meta">
+                                    <span class="meta-item"><i class="fas fa-times-circle"></i> Authentication Failed</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon deploy">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-header">
+                                    <h4>Configuration Deployed</h4>
+                                    <span class="activity-time">Yesterday, 16:20 PM</span>
+                                </div>
+                                <p class="activity-description">
+                                    <strong>Admin</strong> deployed configuration to <strong>Edge-Firewall-01</strong>
+                                </p>
+                                <div class="activity-meta">
+                                    <span class="meta-item"><i class="fas fa-check-circle"></i> Successful</span>
+                                    <span class="meta-item"><i class="fas fa-clock"></i> 1m 15s duration</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Config Editor Modal (Hidden by default) -->
+            <div id="config-editor-modal" class="modal" style="display: none;">
+                <div class="modal-content large">
+                    <div class="modal-header">
+                        <h2>Edit Configuration: <span id="config-device-name">Core-Router-01</span></h2>
+                        <div class="modal-tabs">
+                            <button class="modal-tab-btn active" data-tab="edit">Edit</button>
+                            <button class="modal-tab-btn" data-tab="diff">Compare</button>
+                            <button class="modal-tab-btn" data-tab="validate">Validate</button>
+                        </div>
+                        <button class="close-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="editor-container active" id="edit-tab">
+                            <div class="editor-header">
+                                <div class="editor-file-info">
+                                    <select id="config-file-selector">
+                                        <option value="running">running-config</option>
+                                        <option value="startup">startup-config</option>
+                                        <option value="candidate">candidate-config</option>
+                                    </select>
+                                    <span class="file-status">Modified</span>
+                                </div>
+                                <div class="editor-actions">
+                                    <button class="btn btn-sm"><i class="fas fa-undo"></i> Revert</button>
+                                    <button class="btn btn-sm"><i class="fas fa-search"></i> Find</button>
+                                    <button class="btn btn-sm"><i class="fas fa-check"></i> Syntax Check</button>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-wrapper">
+                                <textarea id="config-editor">
+# Core-Router-01 Configuration
+# Last modified: 2023-06-15 08:45 AM
+
+hostname Core-Router-01
+!
+interface GigabitEthernet0/0
+ description WAN Connection
+ ip address 203.0.113.1 255.255.255.0
+ duplex auto
+ speed auto
+ no shutdown
+!
+interface GigabitEthernet0/1
+ description LAN Connection
+ ip address 192.168.1.1 255.255.255.0
+ duplex auto
+ speed auto
+ no shutdown
+!
+ip route 0.0.0.0 0.0.0.0 203.0.113.254
+!
+access-list 101 permit ip any any
+!
+line con 0
+ logging synchronous
+line vty 0 4
+ login local
+ transport input ssh
+!
+ntp server 192.168.1.100
+!
+end
+</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-container" id="diff-tab" style="display: none;">
+                            <!-- Diff view would go here -->
+                        </div>
+                        
+                        <div class="editor-container" id="validate-tab" style="display: none;">
+                            <!-- Validation results would go here -->
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button class="btn"><i class="fas fa-save"></i> Save</button>
+                        <button class="btn"><i class="fas fa-upload"></i> Deploy</button>
+                        <button class="btn"><i class="fas fa-download"></i> Backup</button>
+                        <button class="btn cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Config History Modal (Hidden by default) -->
+            <div id="config-history-modal" class="modal" style="display: none;">
+                <div class="modal-content medium">
+                    <div class="modal-header">
+                        <h2>Configuration History: <span id="history-device-name">Core-Router-01</span></h2>
+                        <button class="close-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="history-filter">
+                            <div class="date-range">
+                                <label>Date Range:</label>
+                                <input type="date" id="history-start-date" value="2023-06-01">
+                                <span>to</span>
+                                <input type="date" id="history-end-date" value="2023-06-15">
+                                <button class="btn btn-sm">Apply</button>
+                            </div>
+                        </div>
+                        
+                        <div class="history-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">
+                                    <div class="date">Jun 15</div>
+                                    <div class="time">08:45 AM</div>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-header">
+                                        <h4>Configuration Deployed</h4>
+                                        <div class="timeline-actions">
+                                            <button class="btn btn-sm"><i class="fas fa-eye"></i> View</button>
+                                            <button class="btn btn-sm"><i class="fas fa-sync-alt"></i> Restore</button>
+                                        </div>
+                                    </div>
+                                    <p class="timeline-description">
+                                        <strong>Admin</strong> deployed configuration
+                                    </p>
+                                    <div class="timeline-meta">
+                                        <span class="meta-item"><i class="fas fa-check-circle"></i> Successful</span>
+                                        <span class="meta-item"><i class="fas fa-info-circle"></i> 12 lines changed</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-date">
+                                    <div class="date">Jun 15</div>
+                                    <div class="time">08:30 AM</div>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-header">
+                                        <h4>Configuration Modified</h4>
+                                        <div class="timeline-actions">
+                                            <button class="btn btn-sm"><i class="fas fa-eye"></i> View</button>
+                                            <button class="btn btn-sm"><i class="fas fa-sync-alt"></i> Restore</button>
+                                        </div>
+                                    </div>
+                                    <p class="timeline-description">
+                                        <strong>Admin</strong> modified configuration
+                                    </p>
+                                    <div class="timeline-meta">
+                                        <span class="meta-item"><i class="fas fa-tag"></i> ACL Update</span>
+                                        <span class="meta-item"><i class="fas fa-info-circle"></i> 8 lines changed</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-date">
+                                    <div class="date">Jun 14</div>
+                                    <div class="time">09:15 AM</div>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-header">
+                                        <h4>Backup Created</h4>
+                                        <div class="timeline-actions">
+                                            <button class="btn btn-sm"><i class="fas fa-eye"></i> View</button>
+                                            <button class="btn btn-sm"><i class="fas fa-sync-alt"></i> Restore</button>
+                                        </div>
+                                    </div>
+                                    <p class="timeline-description">
+                                        <strong>System</strong> created backup automatically
+                                    </p>
+                                    <div class="timeline-meta">
+                                        <span class="meta-item"><i class="fas fa-check-circle"></i> Successful</span>
+                                        <span class="meta-item"><i class="fas fa-file-alt"></i> 35 KB</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-date">
+                                    <div class="date">Jun 12</div>
+                                    <div class="time">14:20 PM</div>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-header">
+                                        <h4>Configuration Deployed</h4>
+                                        <div class="timeline-actions">
+                                            <button class="btn btn-sm"><i class="fas fa-eye"></i> View</button>
+                                            <button class="btn btn-sm"><i class="fas fa-sync-alt"></i> Restore</button>
+                                        </div>
+                                    </div>
+                                    <p class="timeline-description">
+                                        <strong>Admin</strong> deployed configuration
+                                    </p>
+                                    <div class="timeline-meta">
+                                        <span class="meta-item"><i class="fas fa-check-circle"></i> Successful</span>
+                                        <span class="meta-item"><i class="fas fa-tag"></i> Interface Update</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Javascript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/configuration.js"></script>
+</body>
+</html> 
